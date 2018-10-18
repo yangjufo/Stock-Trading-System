@@ -1,0 +1,22 @@
+{
+  "name": "analysis",
+  "authors": [
+    "jason"
+  ],
+  "description": "none",
+  "main": "none",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "^4.2.6",
+    "socket.io-client": "*"
+  }
+}

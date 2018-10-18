@@ -1,0 +1,162 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+global.mySockets = {};
+var app = require('../app');
+var debug = require('debug')('newSys:server');
+var http = require('http');
+var fs = require("fs");
+var express = require('express');
+var router = express.Router();
+//var trade = require("../trade");
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '2233');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+app.server = server;
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+
+
+var io = require('socket.io')(server);
+var request = require('request');
+
+io.on('connection', function (socket) {
+  console.log("connect socket in www!");
+  global.mySockets['local'] = socket;
+  //socket.emit('news', { hello: 'world' });
+  socket.on('call', function (data) {
+    console.log("call");
+    socket.emit("get", {result: "res"});
+  });
+
+
+  //get stock information from aliyun
+  socket.on('getStockInfo', function (data) {
+    console.log("getStockInfo");
+
+
+    var url = 'http://stock.market.alicloudapi.com/realtime-k';
+    var params = {  //还有一些可选参数,参照api
+      from: 5,
+      needAlarm: 1,
+      needIndex: 1,
+      "beginDay":"20161101",
+    "code":"600004",
+    "time":"day",
+    "type":"bfq"
+    };
+
+    var headers = {
+      'User-Agent': 'Super Agent/0.0.1',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'APPCODE ' + 'd0c1bb9cbdea40d5ab4db4d1cfbeaadb'    //填写你自己的appcode
+    };
+
+    var querys = {};
+    querys["beginDay"] =  "20161102";
+    querys["code"] =  "600004";
+    querys["time"] =  "day";
+    querys["type"] =  "bfq";
+
+    var options = {
+      url: url,
+      method: 'GET',
+      headers: headers,  //请求头
+      query: params,  //请求参数
+      querys: querys
+    }
+    //Start the request
+    request(options, function(error, response, body) {
+      if(error){
+      }else{
+        //api调用成功后的操作
+        console.log("success!");
+        //console.log(response);
+        socket.emit('retStockInfo', { response: response, body: body});
+      }
+    })
+  });
+
+});
+
+
+

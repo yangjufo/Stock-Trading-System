@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--360浏览器优先以webkit内核解析-->
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    <link href="css/plugins/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+
+    <link href="css/plugins/cropper/cropper.min.css" rel="stylesheet">
+
+    <link href="css/plugins/switchery/switchery.css" rel="stylesheet">
+
+    <link href="css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
+
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
+    <link href="css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
+
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+
+    <link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <title> - 主页示例</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>信息查询</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="graph_flot.html#">选项1</a>
+                            </li>
+                            <li><a href="graph_flot.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="m-b-sm">
+                        <span class="badge badge-primary">price filter</span>
+                    </div>
+                    <form role="form" class="form-inline">
+                        <div class="form-group">
+                            <input type="" placeholder="起始价格" id="priceStart" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="" placeholder="终止价格" id="priceEnd" class="form-control">
+                        </div>
+                    </form>
+
+                    <br/>
+                    <div class="form-group" id="data_1">
+                        <span class="badge badge-primary">time filter</span>
+                        <br/>
+                        <p></p>
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="text" class="form-control" value="2014-11-11">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <span class="badge badge-primary">code filter</span>
+                        <br/>
+                        <p></p>
+                            <input type="" placeholder="股票代码" id="codeFilter" class="form-control">
+                        <br/>
+                        <!--<span class="input-group-btn">-->
+                        <!--</span>-->
+                    </div>
+                    <br/>
+                    <p></p>
+                    <input type="button" value="搜索" id="search" onclick="clickFunc()">
+                    <!--<button type="button" class="btn btn-primary" id="search">搜索-->
+                    <!--</button>-->
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>查询结果</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="graph_flot.html#">选项1</a>
+                            </li>
+                            <li><a href="graph_flot.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped table-bordered table-hover " id="editable">
+                        <thead>
+                        <tr>
+                            <th>交易时间</th>
+                            <th>交易量</th>
+                            <th>交易价格</th>
+                            <th>股票代码</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="gradeA">
+                            <td>2017.01.01</td>
+                            <td>100
+                            </td>
+                            <td>100</td>
+                            <td class="center">haha</td>
+                            <td class="center">X</td>
+                        </tr>
+                        <tr class="gradeA">
+                            <td>2017.01.01</td>
+                            <td>1000
+                            </td>
+                            <td>100</td>
+                            <td class="center">haha</td>
+                            <td class="center">X</td>
+                        </tr>
+                        <tr class="gradeA">
+                            <td>2017.01.01</td>
+                            <td>200
+                            </td>
+                            <td>101</td>
+                            <td class="center">haha</td>
+                            <td class="center">X</td>
+                        </tr>
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>交易时间</th>
+                            <th>交易量</th>
+                            <th>交易价格</th>
+                            <th>交易者</th>
+                            <th>备注</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/layer/layer.min.js"></script>
+    <!-- Flot -->
+    <script src="js/plugins/flot/jquery.flot.js"></script>
+    <script src="js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="js/plugins/flot/jquery.flot.resize.js"></script>
+    <script src="js/plugins/flot/jquery.flot.pie.js"></script>
+    <!-- ECharts -->
+    <script src="js/plugins/echarts/echarts-all.js"></script>
+    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+
+    <!-- Data Tables -->
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js"></script>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+
+    <!-- JSKnob -->
+    <script src="js/plugins/jsKnob/jquery.knob.js"></script>
+
+    <!-- Input Mask-->
+    <script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+    <!-- Data picker -->
+    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+
+    <!-- Prettyfile -->
+    <script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+
+    <!-- NouSlider -->
+    <script src="js/plugins/nouslider/jquery.nouislider.min.js"></script>
+
+    <!-- Switchery -->
+    <script src="js/plugins/switchery/switchery.js"></script>
+
+    <!-- IonRangeSlider -->
+    <script src="js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
+    <!-- MENU -->
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+    <!-- Color picker -->
+    <script src="js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+    <!-- Clock picker -->
+    <script src="js/plugins/clockpicker/clockpicker.js"></script>
+
+    <!-- Image cropper -->
+    <script src="js/plugins/cropper/cropper.min.js"></script>
+
+    <script src="js/demo/form-advanced-demo.js"></script>
+    <script src="js/bower_components/d3/d3.js"></script>
+    <script src="js/bower_components/socket.io-client/dist/socket.io.js"></script>
+    <!-- Data Tables -->
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js"></script>
+
+    <!--flotdemo-->
+    <script type="text/javascript">
+        var clickFunc = function () {
+            console.log("click");
+
+
+
+            var socket = io.connect("http://localhost:2233");
+            socket.emit("queryResult", { my: 'data' });
+            socket.on('getQueryResult', function (data) {
+                console.log(data);
+                //socket.emit('my other event', { my: 'data' });
+            });
+
+
+            $('#editable').dataTable().fnAddData([
+                "Custom row",
+                "New row",
+                "New row",
+                "New row",
+                "New row"]);
+
+        }
+        $(function() {
+
+
+        });
+
+setInterval(function () {
+
+}, 1000);
+
+    </script>
+</body>
+
+</html>
