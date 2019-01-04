@@ -1,10 +1,5 @@
 
 
-//TODO：指令查找逻辑：接收前端发来的post请求，解析后socket.io发给本文件
-//TODO: 交易结果查找：接收前端发来的socket.io请求并处理
-//TODO: 交易结果查询前端，有多个条件可选的表单，类似问卷
-
-
 var io = require("socket.io");
 var db = require("./models.js");
 var request = require("http").request;

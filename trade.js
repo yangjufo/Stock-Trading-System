@@ -2,9 +2,6 @@
  * Created by yangj on 2017/6/15.
  */
 
-
-//TODO：前后端逻辑，前端接收客户端发来的post请求解析后，用socket.io发给该文件
-
 var io = require("socket.io")('2233');
 var db = require("./models.js");
 var request = require("http").request;
@@ -124,8 +121,7 @@ function TradingInstruction() {
                     "lifeCycle": 0
                 }
             );
-        }
-        else {
+        } else {
             res = db.TradingInstructionModel.find(
                 {
                     "stockID": this.tradingInstruction.stockID,
@@ -208,8 +204,7 @@ function TradingResult() {
             if (callback !== null) {
                 console.log("success");
                 return true;
-            }
-            else {
+            } else {
                 console.log("failed");
                 return false;
             }
@@ -239,7 +234,6 @@ function TradingResult() {
         return isSuccess;
     };
 }
-
 
 
 //处理交易指令，即匹配交易
@@ -485,7 +479,6 @@ function dealTradingInstruction() {
 }
 
 
-//TODO：接收前端的请求执行操作
 var getTradingInstruction = new dealTradingInstruction();
 socket.on("tradingInstruction", function (inst) {
     console.log("receive trading instruction");
@@ -507,7 +500,7 @@ var doTrading = function (inst) {
                         if (!isnt.tradingResult.storeResult())
                             if (!inst.tradingResult.sendResultUser())
                                 if (!inst.tradingResult.sendResultUser())
-                                    if(!inst.updateMoney())
-                                        if(!inst.updateStock())
+                                    if (!inst.updateMoney())
+                                        if (!inst.updateStock())
                                             console("trade succeed");
 };

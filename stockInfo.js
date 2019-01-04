@@ -17,7 +17,7 @@
 //    var req = request(options, function(res){
 //        res.on('data', function(chunk){
 //            console.log(chunk);
-//            //TODO:获取股票信息，下面是阿里云的接口
+//            //获取股票信息，下面是阿里云的接口
 //            //https://market.aliyun.com/products/56928004/cmapi014124.html#sku=yuncode812400000
 //        })
 //    });
